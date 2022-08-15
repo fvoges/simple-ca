@@ -1,5 +1,11 @@
 #!/bin/bash
 
+function cleanup {
+  test -f csr.conf && rm -f csr.conf
+}
+
+trap cleanup EXIT
+
 . .vars
 
 CA_NAME="My private test CA"
@@ -9,15 +15,15 @@ HOST="vault"
 DOMAIN="local"
 FQDN="${HOST}.${DOMAIN}"
 IP="127.0.0.1"
-ALT_NAMES="DNS.1 = $HOST
-DNS.2 = $FQDN
-DNS.3 = vault01
-DNS.4 = vault01.local
-DNS.5 = vault02
-DNS.6 = vault02.local
-DNS.7 = vault03
-DNS.8 = vault03.local
-DNS.9 = localhost
+ALT_NAMES="DNS = $HOST
+DNS.1 = $FQDN
+DNS.2 = vault01
+DNS.3 = vault01.local
+DNS.4 = vault02
+DNS.5 = vault02.local
+DNS.6 = vault03
+DNS.7 = vault03.local
+DNS.8 = localhost
 IP = 127.0.0.1
 "
 DAYS="10000"

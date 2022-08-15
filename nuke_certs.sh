@@ -2,4 +2,4 @@
 
 . .vars
 
-rm -rf $CA_DIR $CRT_DIR
+rm -rf .srl $CA_DIR $CRT_DIR

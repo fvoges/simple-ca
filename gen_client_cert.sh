@@ -2,21 +2,26 @@
 
 . .vars
 
+function cleanup {
+  test -f csr.conf && rm -f csr.conf
+}
+
+trap cleanup EXIT
+
 ENV="${1:-uat}"
 GRP="${2:-cwc}"
 APP="${3:-svc1}"
 
 CN="${ENV}-${GRP}-${APP}"
 IP="127.0.0.1"
-ALT_NAMES="DNS.1 = ${HOST}
-DNS.2 = ${CN}
-DNS.3 = vault01
-DNS.4 = vault01.local
-DNS.5 = vault02
-DNS.6 = vault02.local
-DNS.7 = vault03
-DNS.8 = vault03.local
-DNS.9 = localhost
+ALT_NAMES="DNS = ${CN}
+DNS.1 = vault01
+DNS.2 = vault01.local
+DNS.3 = vault02
+DNS.4 = vault02.local
+DNS.5 = vault03
+DNS.6 = vault03.local
+DNS.7 = localhost
 IP = 127.0.0.1
 "
 DAYS="10000"
